@@ -7,16 +7,20 @@
  import Footer from './components/Footer'
  import NavLeft from './components/NavLeft'
  import './style/common.less'
+import Home from './pages/home'
  export default class Admin extends React.Component{
    render() {
    return  (
    <Row className="container">
-     <Col span="3" className="nav-left">
+     <Col span="4" className="nav-left">
     <NavLeft/>
      </Col>
-     <Col span="21" className="main">
+     <Col span="20" className="main">
       <Header/>
-      <Row class="className">container</Row>
+      <Row className="content">
+     {/* <Home/>*/}
+        {this.props.children}
+      </Row>
       <Footer/>
      </Col>
    </Row>
