@@ -37,7 +37,7 @@ this.setState({
       <div>
       <div className="logo">
        <img src="/assets/logo-ant.svg"/>
-       <h1>IMooc MS</h1>
+       <h1>Good Time</h1>
       </div>
       <Menu
       theme="dark"
