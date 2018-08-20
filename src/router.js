@@ -14,12 +14,27 @@ import Home from './pages/home';
  import TabPages from './pages/ui/tabs'
 import Gallery from './pages/ui/gallery'
 import CarouselPages from './pages/ui/carousel'
+import FormLogin from './pages/form/login'
+import FormRegister from './pages/form/register'
+import BasicTable from './pages/table/basicTable'
+import HighTable from './pages/table/highTable'
+import Rich from './pages/rich'
+import City from './pages/city/index'
+import Order from './pages/order/index'
+import Common from './common'
+import OrderDetail from './pages/order/detail'
  export default class IRouter extends React.Component{
   render() {
   return (
     <HashRouter>
      <App>
        <Switch>
+       <Route path="/common" render={() =>
+       <Common>
+         <Route path="/common/order/detail/:orderId" component={OrderDetail}/>
+       </Common>
+       }
+       />
          <Route path="/" render={() =>
          <Admin>
           <Switch>
@@ -32,6 +47,13 @@ import CarouselPages from './pages/ui/carousel'
             <Route path="/ui/tabs" component={TabPages}/>
             <Route path="/ui/gallery" component={Gallery} />
             <Route path="/ui/carousel" component={CarouselPages} />
+            <Route path="/form/login" component={FormLogin} />
+            <Route path="/form/reg" component={FormRegister} />
+            <Route path="/table/basic" component={BasicTable} />
+            <Route path="/table/high" component={HighTable} />
+            <Route path='/rich' component={Rich} />
+            <Route path="/city" component={City} />
+            <Route path="/order" component={Order}/>
             <Redirect to="/home" />
           </Switch>
          </Admin>

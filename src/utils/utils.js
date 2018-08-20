@@ -2,6 +2,8 @@
  * Created by licong on 2018/8/7.
  */
  import React from 'react';
+ import {Select} from 'antd'
+ const Option = Select.Option
  export default {
    formateDate(time) {
    if (time) {
@@ -17,5 +19,43 @@
    }  else {
    return ''
    }
+   },
+   pagination(data, callback) {
+   return {
+   onChange: (current) => {
+   callback(current)
+   },
+   current: data.result.page,
+   pageSize:data.result.page_size,
+   total: data.result.total_count,
+   showTotal: () => {
+   return `共${data.result.total_count}条`
+   },
+   showQuickJumper: true
+   }
+   },
+   getOptionList(data) {
+   if(!data) {
+   return [];
+   }
+   let options = []
+   data.map((item) => {
+   options.push(<Option value={item.id} key={item.id}>{item.name}</Option>)
+   })
+   return options;
+   },
+   updateSelectedItem(selectedRowKeys, selectedRows, selectedIds) {
+   if (selectedIds) {
+   this.setState({
+   selectedRowKeys,
+   selectedIds: selectedIds,
+   selectedItem: selectedRows
+   })
+   } else {
+   this.setState({
+       selectedRowKeys,
+       selectedItem: selectedRows
+       })
+     }
    }
  }
