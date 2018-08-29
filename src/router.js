@@ -23,14 +23,19 @@ import City from './pages/city/index'
 import Order from './pages/order/index'
 import Common from './common'
 import OrderDetail from './pages/order/detail'
+import User from './pages/user/index'
+import BikeMap from './pages/map/bikeMap'
+import Bar from './pages/echarts/bar/index'
+import Line from './pages/echarts/line/index'
+import Pie from './pages/echarts/pie/index'
+import PermissionUser from './pages/permission'
  export default class IRouter extends React.Component{
   render() {
   return (
     <HashRouter>
      <App>
        <Switch>
-       <Route path="/common" render={() =>
-       <Common>
+       <Route path="/common" render={() =>   <Common>
          <Route path="/common/order/detail/:orderId" component={OrderDetail}/>
        </Common>
        }
@@ -54,7 +59,13 @@ import OrderDetail from './pages/order/detail'
             <Route path='/rich' component={Rich} />
             <Route path="/city" component={City} />
             <Route path="/order" component={Order}/>
-            <Redirect to="/home" />
+            <Route path='/user' component={User} />
+            <Route path='/bikeMap' component={BikeMap} />
+            <Route path="/charts/bar" component={Bar} />
+            <Route path="/charts/line" component={Line} />
+            <Route path="/charts/pie" component={Pie} />
+            <Route path="/permission" component={PermissionUser} />
+            <Redirect to="/home" />{/*默认跳转到home*/}
           </Switch>
          </Admin>
          }>

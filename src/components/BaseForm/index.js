@@ -22,11 +22,12 @@
        formList.forEach((item,i)=>{
          let label = item.label;
          let field = item.field;
+         let key = i
          let initialValue = item.initialValue || '';
          let placeholder = item.placeholder;
          let width = item.width;
          if (item.type == '时间查询'){
-           const begin_time = <FormItem label="订单时间" key={field}>
+           const begin_time = <FormItem label="订单时间" key={key}>
              {
                getFieldDecorator('begin_time')(
                  <DatePicker showTime={true} placeholder={placeholder} format="YYYY-MM-DD HH:mm:ss"/>
@@ -34,7 +35,7 @@
              }
            </FormItem>;
            formItemList.push(begin_time)
-           const end_time = <FormItem label="~" colon={false} key={field}>
+           const end_time = <FormItem label="~" colon={false} key='endtime'>
              {
                getFieldDecorator('end_time')(
                  <DatePicker showTime={true} placeholder={placeholder} format="YYYY-MM-DD HH:mm:ss" />
@@ -43,7 +44,7 @@
            </FormItem>;
            formItemList.push(end_time)
          }else if(item.type == 'INPUT'){
-           const INPUT = <FormItem label={label} key={field}>
+           const INPUT = <FormItem label={label} key={key}>
              {
                getFieldDecorator([field],{
                  initialValue: initialValue
@@ -54,9 +55,9 @@
            </FormItem>;
            formItemList.push(INPUT)
          } else if (item.type == 'SELECT') {
-           const SELECT = <FormItem label={label} key={field}>
+           const SELECT = <FormItem label={label} key={key}>
              {
-               getFieldDecorator([field], {
+               getFieldDecorator(field, {
                  initialValue: initialValue
                })(
                  <Select
@@ -70,7 +71,7 @@
            </FormItem>;
            formItemList.push(SELECT)
          } else if (item.type == 'CHECKBOX') {
-           const CHECKBOX = <FormItem label={label} key={field}>
+           const CHECKBOX = <FormItem label={label} key={key}>
              {
                getFieldDecorator([field], {
                  valuePropName: 'checked',

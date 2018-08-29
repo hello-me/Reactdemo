@@ -36,11 +36,13 @@
    this.drawBikeRoute(result.position_list);
    this.drwaServiceArea(result.area);
   }
+   // 添加地图控件
    addMapcontrol = () => {
    let map = this.map;
    map.addControl(new window.BMap.ScaleControl({anchor: window.BMAP_ANCHOR_TOP_RIGHT}));
    map.addControl(new window.BMap.NavigationControl({anchor: window.BMAP_ANCHOR_TOP_RIGHT}));
    }
+   // 绘制用户的行驶路线
    drawBikeRoute = (positionList) => {
     let map = this.map;
     let startPoint = '';
