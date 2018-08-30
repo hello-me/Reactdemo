@@ -6,15 +6,31 @@ import MenuConfig from './../../config/menuConfig'
 import {Menu, Icon} from 'antd'
 import {NavLink} from 'react-router-dom'
 import './index.less'
+import { connect } from 'react-redux'
+import {switchMenu} from './../../redux/action'
 const SubMenu = Menu.SubMenu;
-export default class NavLeft extends React.Component {
+ class NavLeft extends React.Component {
   state = {
-  currentKey: ''
+  currentKey: []
+  }
+  handleClick = ({item, key}) => {
+  if (key == this.state.currentKey) {
+  return false;
+  }
+    const { dispatch } = this.props;
+    console.log(item)
+    dispatch(switchMenu(item.props.title));
+
+  this.setState({
+  currentKey: [key]
+  })
   }
 componentWillMount() {
 const menuTreeNode = this.renderMenu(MenuConfig);
+let currentKey = [window.location.hash.replace(/#|\?.*$/g, '')];
 this.setState({
-  menuTreeNode
+  menuTreeNode,
+  currentKey
 })
 }
   //菜单渲染
@@ -32,15 +48,26 @@ this.setState({
   </Menu.Item>
   })
   }
+   homeHandleClick = () => {
+     const { dispatch } = this.props;
+     dispatch(switchMenu('首页'));
+     this.setState({
+       currentKey: []
+     });
+   };
   render() {
     return (
       <div>
+        <NavLink to="/home" onClick={this.homeHandleClick}>
       <div className="logo">
        <img src="/assets/logo-ant.svg"/>
        <h1>Good Time</h1>
       </div>
+        </NavLink>
       <Menu
       theme="dark"
+      onClick={this.handleClick}
+      selectedKeys={this.state.currentKey}
       >
         { this.state.menuTreeNode }
       </Menu>
@@ -48,3 +75,4 @@ this.setState({
     )
   }/**/
 }
+export default connect()(NavLeft)
